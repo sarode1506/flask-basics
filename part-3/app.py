@@ -14,7 +14,7 @@ app = Flask(__name__)
 
 @app.route('/')
 def home():
-    student_name = "Alex"
+    student_name = "Ananya"
     return render_template('index.html', name=student_name)  # Pass variable to template as {{ name }}
 
 

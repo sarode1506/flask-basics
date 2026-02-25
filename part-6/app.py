@@ -9,7 +9,7 @@ How to Run:
 3. Open browser: http://localhost:5000
 """
 
-from flask import Flask, render_template
+from flask import Flask, render_template, redirect, url_for, request
 
 app = Flask(__name__)
 
@@ -21,6 +21,42 @@ TASKS = [
 ]
 
 # Your code here...
+# Home - Show all tasks
+@app.route("/")
+def home():
+    return render_template("index.html", tasks=TASKS)
+
+# Add Task Page
+@app.route("/add", methods=["GET", "POST"])
+def add_task():
+    if request.method == "POST":
+        new_id = len(TASKS) + 1
+        title = request.form.get("title")
+        status = request.form.get("status")
+        priority = request.form.get("priority")
+
+        TASKS.append({
+            'id': new_id,
+            'title': title,
+            'status': status,
+            'priority': priority
+        })
+
+        return redirect(url_for("home"))
+
+    return render_template("add.html")
+
+# Single Task Detail
+@app.route("/task/<int:id>")
+def task_detail(id):
+    task = next((t for t in TASKS if t["id"] == id), None)
+    return render_template("task.html", task=task)
+
+# About Page
+@app.route("/about")
+def about():
+    return render_template("about.html")
+
 
 
 if __name__ == '__main__':

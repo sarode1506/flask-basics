@@ -1,0 +1,24 @@
+{% extends "base.html" %}
+
+{% block content %}
+<h2>All Tasks</h2>
+
+<ul>
+    {% for task in tasks %}
+        <li>
+            <a href="/task/{{ task.id }}">
+                {{ task.title | upper }}
+            </a>
+
+            - {{ task.status }}
+
+            {% if task.status == "Completed" %}
+                ✅
+            {% endif %}
+
+            (Priority: {{ task.priority }})
+        </li>
+    {% endfor %}
+</ul>
+
+{% endblock %}
