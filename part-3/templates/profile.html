@@ -89,6 +89,9 @@
         <!-- Profile card using multiple variables -->
         <div class="profile-card">
             <h2>{{ name }}</h2>
+            {% if role == "Admin" %}
+            <span class="badge badge-success">Edit Profile</span>
+            {% endif %}
             <div class="profile-item">
                 <span>Age:</span> {{ age }} years old
             </div>
@@ -103,6 +106,13 @@
                 {% else %}
                     <span class="badge badge-warning">Not Enrolled</span>
                 {% endif %}
+                <h2>Hobbies</h2>
+
+                <ul>
+                {% for hobby in hobbies %}
+                <li>{{ hobby }}</li>
+                {% endfor %}
+                </ul>
             </div>
         </div>
 

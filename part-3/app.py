@@ -21,17 +21,22 @@ def home():
 @app.route('/profile')
 def profile():
     user_data = {
-        'name': 'Sarah',
-        'age': 22,
+        'name': 'Ananya',
+        'age': 21,
         'course': 'Web Development',
-        'is_enrolled': True
-    }
+        'is_enrolled': True}
+    
+    hobbies = ['Cooking', 'Yoga', 'Watching Anime', 'Traveling']
+
+    # Step 4 Exercise: Add role for conditional check
+    role = "Admin"
     return render_template('profile.html',  # Pass multiple variables to template
                            name=user_data['name'],
                            age=user_data['age'],
                            course=user_data['course'],
-                           is_enrolled=user_data['is_enrolled'])
-
+                           is_enrolled=user_data['is_enrolled'],
+                           hobbies=hobbies,
+                           role=role)
 
 @app.route('/skills')
 def skills():
@@ -47,7 +52,6 @@ def projects():
         {'name': 'Weather App', 'status': 'Planned', 'tech': 'JavaScript'},
     ]
     return render_template('projects.html', projects=project_list)
-
 
 if __name__ == '__main__':
     app.run(debug=True)
